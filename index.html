@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inserisci Dati</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+.container {
+  display: flex;
+  width: 80%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.form {
+  flex: 1;
+  padding: 40px;
+}
+.form h2 {
+  margin-bottom: 20px;
+  color: #5563DE;
+}
+.form input {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.form input:focus {
+  border-color: #5563DE;
+  outline: none;
+}
+.form button {
+  background: #5563DE;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.form button:hover {
+  background: #3742fa;
+}
+.output {
+  flex: 1;
+  background: #f5f6fa;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 4px solid #5563DE;
+}
+.output h3 {
+  color: #5563DE;
+  margin-bottom: 10px;
+}
+.output p {
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="form">
+    <h2>Inserisci i tuoi dati</h2>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="cognome" placeholder="Cognome">
+    <input type="text" id="indirizzo" placeholder="Indirizzo">
+    <button onclick="inserisci()">Mostra a destra</button>
+  </div>
+  <div class="output" id="output">
+    <h3>Dati inseriti:</h3>
+  </div>
+</div>
+
+<script>
+function inserisci() {
+  const nome = document.getElementById("nome").value;
+  const cognome = document.getElementById("cognome").value;
+  const indirizzo = document.getElementById("indirizzo").value;
+  const output = document.getElementById("output");
+  output.innerHTML = `
+    <h3>Dati inseriti:</h3>
+    <p><strong>Nome:</strong> ${nome}</p>
+    <p><strong>Cognome:</strong> ${cognome}</p>
+    <p><strong>Indirizzo:</strong> ${indirizzo}</p>
+  `;
+}
+</script>
+</body>
+</html>
 

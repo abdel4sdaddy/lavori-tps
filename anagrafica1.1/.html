@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anagrafica Utente</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #333;
+}
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+.form {
+  flex: 1;
+  padding: 40px;
+  background: #fff;
+}
+.form h2 {
+  color: #5563DE;
+  margin-bottom: 20px;
+}
+.form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+.form input:focus {
+  border-color: #5563DE;
+  outline: none;
+  box-shadow: 0 0 5px rgba(85,99,222,0.5);
+}
+button {
+  margin-top: 15px;
+  background: #5563DE;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #3d4fdc;
+}
+.output {
+  flex: 1;
+  background: #f5f6fa;
+  padding: 40px;
+  border-left: 5px solid #5563DE;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.output h3 {
+  color: #5563DE;
+  margin-bottom: 15px;
+}
+.output p {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="form">
+    <h2>Inserisci Anagrafica Utente</h2>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="cognome" placeholder="Cognome">
+    <input type="text" id="indirizzo" placeholder="Indirizzo">
+    <input type="text" id="citta" placeholder="Città">
+    <input type="text" id="cap" placeholder="CAP">
+    <label for="dataNascita">Data di nascita:</label>
+    <input type="date" id="dataNascita">
+    <button onclick="mostraDati()">Mostra Anagrafica</button>
+  </div>
 
+  <div class="output" id="output">
+    <h3>Dati utente:</h3>
+    <p>Compila il modulo e premi <b>Mostra Anagrafica</b>.</p>
+  </div>
+</div>
+
+<script>
+function mostraDati() {
+  const nome = document.getElementById("nome").value.trim();
+  const cognome = document.getElementById("cognome").value.trim();
+  const indirizzo = document.getElementById("indirizzo").value.trim();
+  const citta = document.getElementById("citta").value.trim();
+  const cap = document.getElementById("cap").value.trim();
+  const dataNascita = document.getElementById("dataNascita").value;
+
+  if (!nome || !cognome || !indirizzo || !citta || !cap || !dataNascita) {
+    alert("Compila tutti i campi!");
+    return;
+  }
+
+  const data = new Date(dataNascita);
+  const anno = data.getFullYear();
+  const oggi = new Date();
+  let eta = oggi.getFullYear() - anno;
+  if (oggi.getMonth() < data.getMonth() || 
+      (oggi.getMonth() === data.getMonth() && oggi.getDate() < data.getDate())) {
+    eta--;
+  }
+
+  let generazione = "";
+  if (anno >= 1901 && anno <= 1927) generazione = "Greatest Generation";
+  else if (anno >= 1928 && anno <= 1945) generazione = "Generazione Silenziosa";
+  else if (anno >= 1946 && anno <= 1964) generazione = "Baby Boomers";
+  else if (anno >= 1965 && anno <= 1980) generazione = "Generazione X";
+  else if (anno >= 1981 && anno <= 1996) generazione = "Millennials";
+  else if (anno >= 1997 && anno <= 2012) generazione = "Generazione Z";
+  else if (anno >= 2013) generazione = "Generazione Alpha";
+  else generazione = "Non classificata";
+
+  const output = document.getElementById("output");
+  output.innerHTML = `
+    <h3>Anagrafica Utente</h3>
+    <p><strong>Nome:</strong> ${nome}</p>
+    <p><strong>Cognome:</strong> ${cognome}</p>
+    <p><strong>Indirizzo:</strong> ${indirizzo}</p>
+    <p><strong>Città:</strong> ${citta}</p>
+    <p><strong>CAP:</strong> ${cap}</p>
+    <p><strong>Data di nascita:</strong> ${data.toLocaleDateString("it-IT")}</p>
+    <p><strong>Età:</strong> ${eta} anni</p>
+    <p><strong>Generazione:</strong> ${generazione}</p>
+  `;
+}
+</script>
+</body>
+</html>

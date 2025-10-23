@@ -20,6 +20,8 @@ div {
 input {
   padding: 5px;
   width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 button {
   margin-top: 10px;
@@ -28,6 +30,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 4px;
 }
 button:hover {
   background-color: #0055aa;
@@ -39,6 +42,16 @@ button:hover {
   border-radius: 5px;
   width: 350px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Rimuove eventuali frecce dai campi numerici su browser diversi */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=text] {
+  -moz-appearance: textfield;
 }
 </style>
 </head>

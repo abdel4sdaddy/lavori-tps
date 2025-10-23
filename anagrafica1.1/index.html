@@ -51,7 +51,7 @@ button:hover {
 <div><label>Indirizzo: </label><input type="text" id="indirizzo"></div>
 <div><label>Città: </label><input type="text" id="citta"></div>
 <div><label>CAP: </label><input type="text" id="cap"></div>
-<div><label>Anno di nascita: </label><input type="number" id="annoNascita" min="1900" max="2025"></div>
+<div><label>Anno di nascita: </label><input type="text" id="annoNascita" placeholder="Es: 2005"></div>
 
 <button onclick="mostra()">Mostra Dati</button>
 
@@ -71,8 +71,13 @@ function mostra() {
     return;
   }
 
+  if(isNaN(anno) || anno < 1900 || anno > 2025) {
+    alert("Inserisci un anno di nascita valido!");
+    return;
+  }
+
   var oggi = new Date();
-  var eta = oggi.getFullYear() - anno;
+  var eta = oggi.getFullYear() - parseInt(anno);
 
   var generazione = "";
   if (anno >= 1901 && anno <= 1927) generazione = "Greatest Generation";

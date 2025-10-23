@@ -51,7 +51,7 @@ button:hover {
 <div><label>Indirizzo: </label><input type="text" id="indirizzo"></div>
 <div><label>Città: </label><input type="text" id="citta"></div>
 <div><label>CAP: </label><input type="text" id="cap"></div>
-<div><label>Data di nascita: </label><input type="date" id="dataNascita"></div>
+<div><label>Anno di nascita: </label><input type="number" id="annoNascita" min="1900" max="2025"></div>
 
 <button onclick="mostra()">Mostra Dati</button>
 
@@ -64,21 +64,15 @@ function mostra() {
   var indirizzo = document.getElementById("indirizzo").value;
   var citta = document.getElementById("citta").value;
   var cap = document.getElementById("cap").value;
-  var dataNascita = document.getElementById("dataNascita").value;
+  var anno = document.getElementById("annoNascita").value;
 
-  if(!nome || !cognome || !indirizzo || !citta || !cap || !dataNascita) {
+  if(!nome || !cognome || !indirizzo || !citta || !cap || !anno) {
     alert("Compila tutti i campi!");
     return;
   }
 
-  var data = new Date(dataNascita);
-  var anno = data.getFullYear();
   var oggi = new Date();
   var eta = oggi.getFullYear() - anno;
-  if (oggi.getMonth() < data.getMonth() || 
-     (oggi.getMonth() === data.getMonth() && oggi.getDate() < data.getDate())) {
-    eta--;
-  }
 
   var generazione = "";
   if (anno >= 1901 && anno <= 1927) generazione = "Greatest Generation";

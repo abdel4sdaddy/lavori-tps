@@ -3,110 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inserisci Dati</title>
+<title>Inserimento Dati</title>
 <style>
 body {
+  font-family: Arial, sans-serif;
+  background-color: #e0ebff;
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  padding: 0;
+}
+
+/* Struttura della pagina: sinistra per i campi, destra per il risultato */
+.contenitore {
   display: flex;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
-  color: #333;
 }
-.container {
-  display: flex;
-  width: 80%;
-  max-width: 900px;
-  background: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-.form {
+
+/* Parte sinistra: form */
+.sinistra {
   flex: 1;
   padding: 40px;
 }
-.form h2 {
-  margin-bottom: 20px;
-  color: #5563DE;
+
+/* Parte destra: contenitore dinamico */
+.destra {
+  flex: 1;
+  background-color: #f0f4ff;
+  border-left: 4px solid #003366;
+  padding: 40px;
 }
-.form input {
-  width: 100%;
-  padding: 10px 15px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  transition: 0.3s;
+
+/* Titoli */
+h2 {
+  color: #003366;
 }
-.form input:focus {
-  border-color: #5563DE;
-  outline: none;
+
+/* Campi di input */
+input {
+  display: block;
+  margin-bottom: 15px;
+  padding: 8px;
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-.form button {
-  background: #5563DE;
+
+/* Pulsante */
+button {
+  background-color: #003366;
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 10px 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
 }
-.form button:hover {
-  background: #3742fa;
+button:hover {
+  background-color: #0055aa;
 }
-.output {
-  flex: 1;
-  background: #f5f6fa;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: 4px solid #5563DE;
-}
-.output h3 {
-  color: #5563DE;
-  margin-bottom: 10px;
-}
-.output p {
-  background: white;
-  padding: 10px;
-  border-radius: 6px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  margin-bottom: 10px;
+
+/* Box con i dati inseriti */
+#risultato {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="form">
+
+<div class="contenitore">
+  <!-- Parte sinistra -->
+  <div class="sinistra">
     <h2>Inserisci i tuoi dati</h2>
-    <input type="text" id="nome" placeholder="Nome">
-    <input type="text" id="cognome" placeholder="Cognome">
-    <input type="text" id="indirizzo" placeholder="Indirizzo">
-    <button onclick="inserisci()">Mostra a destra</button>
+    <label>Nome:</label>
+    <input type="text" id="nome">
+    <label>Cognome:</label>
+    <input type="text" id="cognome">
+    <label>Indirizzo:</label>
+    <input type="text" id="indirizzo">
+    <button onclick="mostra()">Mostra a destra</button>
   </div>
-  <div class="output" id="output">
-    <h3>Dati inseriti:</h3>
+
+  <!-- Parte destra -->
+  <div class="destra">
+    <h2>Dati Inseriti</h2>
+    <div id="risultato">
+      Inserisci i dati a sinistra e premi il pulsante.
+    </div>
   </div>
 </div>
 
 <script>
-function inserisci() {
-  const nome = document.getElementById("nome").value;
-  const cognome = document.getElementById("cognome").value;
-  const indirizzo = document.getElementById("indirizzo").value;
-  const output = document.getElementById("output");
-  output.innerHTML = `
-    <h3>Dati inseriti:</h3>
-    <p><strong>Nome:</strong> ${nome}</p>
-    <p><strong>Cognome:</strong> ${cognome}</p>
-    <p><strong>Indirizzo:</strong> ${indirizzo}</p>
-  `;
+function mostra() {
+  var nome = document.getElementById("nome").value;
+  var cognome = document.getElementById("cognome").value;
+  var indirizzo = document.getElementById("indirizzo").value;
+
+  if(!nome || !cognome || !indirizzo) {
+    alert("Compila tutti i campi!");
+    return;
+  }
+
+  var testo = "";
+  testo += "<b>Nome:</b> " + nome + "<br>";
+  testo += "<b>Cognome:</b> " + cognome + "<br>";
+  testo += "<b>Indirizzo:</b> " + indirizzo;
+
+  document.getElementById("risultato").innerHTML = testo;
 }
 </script>
+
 </body>
 </html>
-

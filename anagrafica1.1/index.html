@@ -6,98 +6,56 @@
 <title>Anagrafica Utente</title>
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(120deg, #a8edea, #fed6e3);
+  font-family: Arial, sans-serif;
+  background-color: #e0ebff;
   margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-#contenitore {
-  background-color: white;
-  width: 80%;
-  max-width: 900px;
-  display: flex;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  overflow: hidden;
-}
-#sinistra {
-  flex: 1;
-  padding: 20px 30px;
-}
-#destra {
-  flex: 1;
-  background-color: #f0f0ff;
-  padding: 20px 30px;
-  border-left: 4px solid #6c63ff;
+  padding: 20px;
 }
 h2 {
-  color: #6c63ff;
-  text-align: center;
+  color: #003366;
 }
-label {
-  font-weight: bold;
-  display: block;
-  margin-top: 10px;
+div {
+  margin-bottom: 10px;
 }
 input {
-  width: 95%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
 }
 button {
-  margin-top: 15px;
-  background-color: #6c63ff;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #003366;
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
 }
 button:hover {
-  background-color: #574bff;
+  background-color: #0055aa;
 }
-#output p {
+#risultato {
+  margin-top: 20px;
   background-color: white;
   padding: 10px;
-  border-radius: 6px;
-  margin: 8px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  width: 350px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 </style>
 </head>
 <body>
-<div id="contenitore">
-  <div id="sinistra">
-    <h2>Inserisci i tuoi dati</h2>
-    <label>Nome:</label>
-    <input type="text" id="nome">
-    <label>Cognome:</label>
-    <input type="text" id="cognome">
-    <label>Indirizzo:</label>
-    <input type="text" id="indirizzo">
-    <label>Città:</label>
-    <input type="text" id="citta">
-    <label>CAP:</label>
-    <input type="text" id="cap">
-    <label>Data di nascita:</label>
-    <input type="date" id="dataNascita">
-    <button onclick="mostra()">Mostra Dati</button>
-  </div>
 
-  <div id="destra">
-    <h2>Anagrafica</h2>
-    <div id="output">
-      <p>Inserisci i dati a sinistra e premi "Mostra Dati".</p>
-    </div>
-  </div>
-</div>
+<h2>Anagrafica Utente</h2>
+
+<div><label>Nome: </label><input type="text" id="nome"></div>
+<div><label>Cognome: </label><input type="text" id="cognome"></div>
+<div><label>Indirizzo: </label><input type="text" id="indirizzo"></div>
+<div><label>Città: </label><input type="text" id="citta"></div>
+<div><label>CAP: </label><input type="text" id="cap"></div>
+<div><label>Data di nascita: </label><input type="date" id="dataNascita"></div>
+
+<button onclick="mostra()">Mostra Dati</button>
+
+<div id="risultato"></div>
 
 <script>
 function mostra() {
@@ -118,7 +76,7 @@ function mostra() {
   var oggi = new Date();
   var eta = oggi.getFullYear() - anno;
   if (oggi.getMonth() < data.getMonth() || 
-      (oggi.getMonth() === data.getMonth() && oggi.getDate() < data.getDate())) {
+     (oggi.getMonth() === data.getMonth() && oggi.getDate() < data.getDate())) {
     eta--;
   }
 
@@ -133,17 +91,17 @@ function mostra() {
   else generazione = "Non classificata";
 
   var testo = "";
-  testo += "<p><strong>Nome:</strong> " + nome + "</p>";
-  testo += "<p><strong>Cognome:</strong> " + cognome + "</p>";
-  testo += "<p><strong>Indirizzo:</strong> " + indirizzo + "</p>";
-  testo += "<p><strong>Città:</strong> " + citta + "</p>";
-  testo += "<p><strong>CAP:</strong> " + cap + "</p>";
-  testo += "<p><strong>Data di nascita:</strong> " + data.toLocaleDateString("it-IT") + "</p>";
-  testo += "<p><strong>Età:</strong> " + eta + " anni</p>";
-  testo += "<p><strong>Generazione:</strong> " + generazione + "</p>";
+  testo += "<b>Nome:</b> " + nome + "<br>";
+  testo += "<b>Cognome:</b> " + cognome + "<br>";
+  testo += "<b>Indirizzo:</b> " + indirizzo + "<br>";
+  testo += "<b>Città:</b> " + citta + "<br>";
+  testo += "<b>CAP:</b> " + cap + "<br>";
+  testo += "<b>Età:</b> " + eta + " anni<br>";
+  testo += "<b>Generazione:</b> " + generazione;
 
-  document.getElementById("output").innerHTML = testo;
+  document.getElementById("risultato").innerHTML = testo;
 }
 </script>
+
 </body>
 </html>

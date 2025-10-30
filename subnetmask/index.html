@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnet Mask Generator</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #2b1055, #7597de);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
 
+    h1 {
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        margin-bottom: 20px;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        padding: 30px 40px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        transition: 0.3s;
+    }
+
+    .container:hover {
+        transform: scale(1.02);
+    }
+
+    input {
+        width: 80px;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    button {
+        background: #00c3ff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #007bbf;
+        transform: translateY(-2px);
+    }
+
+    .result {
+        margin-top: 20px;
+        font-size: 1.2rem;
+    }
+
+    .binary {
+        font-family: 'Courier New', monospace;
+        background: rgba(255,255,255,0.1);
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        display: inline-block;
+        letter-spacing: 2px;
+    }
+
+    .highlight {
+        color: #00ffcc;
+    }
+
+    .octet {
+        margin: 0 5px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Subnet Mask Generator</h1>
+
+<div class="container">
+    <label for="prefix">Prefix number (0–32): </label>
+    <input type="number" id="prefix" min="0" max="32" placeholder="24">
+    <button onclick="generateMask()">Genera</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function generateMask() {
+    let prefix = parseInt(document.getElementById("prefix").value);
+    if (isNaN(prefix) || prefix < 0 || prefix > 32) {
+        document.getElementById("result").innerHTML = "Inserisci un numero tra 0 e 32.";
+        return;
+    }
+
+    let fullOctets = Math.floor(prefix / 8);
+    let remainingBits = prefix % 8;
+    let binaryMask = [];
+
+    for (let i = 0; i < 4; i++) {
+        if (i < fullOctets) {
+            binaryMask.push("11111111");
+        } else if (i === fullOctets && remainingBits > 0) {
+            binaryMask.push("1".repeat(remainingBits).padEnd(8, "0"));
+        } else {
+            binaryMask.push("00000000");
+        }
+    }
+
+    let binaryString = binaryMask.map(octet => `<span class="octet highlight">${octet}</span>`).join(" . ");
+    document.getElementById("result").innerHTML = `
+        <div><b>Subnet mask in binario:</b></div>
+        <div class="binary">${binaryString}</div>
+    `;
+}
+</script>
+
+</body>
+</html>

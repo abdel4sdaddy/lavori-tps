@@ -45,6 +45,14 @@
         outline: none;
         font-size: 1.2rem;
         text-align: center;
+        /* Rimuove lo spin nei browser WebKit */
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Rimuove lo spin nei browser Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 
     button {
@@ -127,5 +135,3 @@ function generateMask() {
 
 </body>
 </html>
-
-

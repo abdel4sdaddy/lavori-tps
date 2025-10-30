@@ -11,33 +11,23 @@ body {
   margin: 0;
   padding: 0;
 }
-
-/* Struttura della pagina: sinistra per i campi, destra per il risultato */
 .contenitore {
   display: flex;
   height: 100vh;
 }
-
-/* Parte sinistra: form */
 .sinistra {
   flex: 1;
   padding: 40px;
 }
-
-/* Parte destra: contenitore dinamico */
 .destra {
   flex: 1;
   background-color: #f0f4ff;
   border-left: 4px solid #003366;
   padding: 40px;
 }
-
-/* Titoli */
 h2 {
   color: #003366;
 }
-
-/* Campi di input */
 input {
   display: block;
   margin-bottom: 15px;
@@ -46,8 +36,6 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
-/* Pulsante */
 button {
   background-color: #003366;
   color: white;
@@ -59,8 +47,6 @@ button {
 button:hover {
   background-color: #0055aa;
 }
-
-/* Box con i dati inseriti */
 #risultato {
   background-color: white;
   padding: 15px;
@@ -72,7 +58,6 @@ button:hover {
 <body>
 
 <div class="contenitore">
-  <!-- Parte sinistra -->
   <div class="sinistra">
     <h2>Inserisci i tuoi dati</h2>
     <label>Nome:</label>
@@ -84,7 +69,6 @@ button:hover {
     <button onclick="mostra()">Mostra a destra</button>
   </div>
 
-  <!-- Parte destra -->
   <div class="destra">
     <h2>Dati Inseriti</h2>
     <div id="risultato">
@@ -98,11 +82,6 @@ function mostra() {
   var nome = document.getElementById("nome").value;
   var cognome = document.getElementById("cognome").value;
   var indirizzo = document.getElementById("indirizzo").value;
-
-  if(!nome || !cognome || !indirizzo) {
-    alert("Compila tutti i campi!");
-    return;
-  }
 
   var testo = "";
   testo += "<b>Nome:</b> " + nome + "<br>";

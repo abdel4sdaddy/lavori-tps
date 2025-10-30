@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversione in Binario</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #003366, #0099ff);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  background-color: rgba(255,255,255,0.1);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+  width: 400px;
+}
+h1 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+input {
+  width: 60px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  margin: 5px;
+}
+button {
+  margin-top: 20px;
+  background-color: #00cc66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background-color: #00ff88;
+}
+#risultato {
+  margin-top: 25px;
+  background-color: rgba(255,255,255,0.15);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Converti in Binario</h1>
+  <div>
+    <input type="number" id="n1" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n2" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n3" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n4" min="0" max="255" placeholder="0-255">
+  </div>
+  <button onclick="converti()">Converti</button>
+  <div id="risultato"></div>
+</div>
+
+<script>
+function converti() {
+  let numeri = [
+    document.getElementById("n1").value,
+    document.getElementById("n2").value,
+    document.getElementById("n3").value,
+    document.getElementById("n4").value
+  ];
+  let binari = "";
+  for (let i = 0; i < numeri.length; i++) {
+    let n = parseInt(numeri[i]);
+    if (isNaN(n) || n < 0 || n > 255) {
+      binari += "00000000";
+    } else {
+      let bin = "";
+      while (n > 0) {
+        bin = (n % 2) + bin;
+        n = Math.floor(n / 2);
+      }
+      while (bin.length < 8) {
+        bin = "0" + bin;
+      }
+      binari += bin;
+    }
+    if (i < numeri.length - 1) binari += " ";
+  }
+  document.getElementById("risultato").innerHTML = binari;
+}
+</script>
+
+</body>
+</html>
 

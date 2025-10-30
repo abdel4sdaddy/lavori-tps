@@ -43,8 +43,6 @@ button:hover {
   width: 350px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
-
-/* Rimuove eventuali frecce dai campi numerici su browser diversi */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -79,18 +77,8 @@ function mostra() {
   var cap = document.getElementById("cap").value;
   var anno = document.getElementById("annoNascita").value;
 
-  if(!nome || !cognome || !indirizzo || !citta || !cap || !anno) {
-    alert("Compila tutti i campi!");
-    return;
-  }
-
-  if(isNaN(anno) || anno < 1900 || anno > 2025) {
-    alert("Inserisci un anno di nascita valido!");
-    return;
-  }
-
   var oggi = new Date();
-  var eta = oggi.getFullYear() - parseInt(anno);
+  var eta = anno ? oggi.getFullYear() - parseInt(anno) : "";
 
   var generazione = "";
   if (anno >= 1901 && anno <= 1927) generazione = "Greatest Generation";
@@ -108,8 +96,8 @@ function mostra() {
   testo += "<b>Indirizzo:</b> " + indirizzo + "<br>";
   testo += "<b>Città:</b> " + citta + "<br>";
   testo += "<b>CAP:</b> " + cap + "<br>";
-  testo += "<b>Età:</b> " + eta + " anni<br>";
-  testo += "<b>Generazione:</b> " + generazione;
+  if (anno) testo += "<b>Età:</b> " + eta + " anni<br>";
+  if (generazione) testo += "<b>Generazione:</b> " + generazione;
 
   document.getElementById("risultato").innerHTML = testo;
 }

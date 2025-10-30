@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binario & Subnet Mask</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #003366, #0099ff);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  min-height: 100vh;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.container {
+  background-color: rgba(255,255,255,0.1);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  text-align: center;
+  margin-bottom: 40px;
+  backdrop-filter: blur(10px);
+}
+
+input {
+  width: 60px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  margin: 5px;
+  -moz-appearance: textfield;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+button {
+  margin-top: 20px;
+  background-color: #00cc66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #00ff88;
+}
+
+#risultato, .result {
+  margin-top: 25px;
+  background-color: rgba(255,255,255,0.15);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.binary {
+  font-family: 'Courier New', monospace;
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: inline-block;
+  letter-spacing: 2px;
+}
+
+.highlight {
+  color: #00ffcc;
+}
+
+.octet {
+  margin: 0 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>Binario & Subnet Mask</h1>
+
+<div class="container">
+  <div>
+    <input type="number" id="n1" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n2" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n3" min="0" max="255" placeholder="0-255">
+    <input type="number" id="n4" min="0" max="255" placeholder="0-255">
+  </div>
+  <button onclick="converti()">Converti</button>
+  <div id="risultato"></div>
+</div>
+
+<div class="container">
+  <input type="number" id="prefix" min="0" max="32" placeholder="24">
+  <button onclick="generateMask()">Genera</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+function converti() {
+  let numeri = [
+    document.getElementById("n1").value,
+    document.getElementById("n2").value,
+    document.getElementById("n3").value,
+    document.getElementById("n4").value
+  ];
+  let binari = "";
+  for (let i = 0; i < numeri.length; i++) {
+    let n = parseInt(numeri[i]);
+    if (isNaN(n) || n < 0 || n > 255) {
+      binari += "00000000";
+    } else {
+      let bin = "";
+      while (n > 0) {
+        bin = (n % 2) + bin;
+        n = Math.floor(n / 2);
+      }
+      while (bin.length < 8) bin = "0" + bin;
+      binari += bin;
+    }
+    if (i < numeri.length - 1) binari += " ";
+  }
+  document.getElementById("risultato").innerHTML = binari;
+}
+
+function generateMask() {
+    let prefix = parseInt(document.getElementById("prefix").value);
+    if (isNaN(prefix) || prefix < 0 || prefix > 32) {
+        document.getElementById("result").innerHTML = "";
+        return;
+    }
+
+    let fullOctets = Math.floor(prefix / 8);
+    let remainingBits = prefix % 8;
+    let binaryMask = [];
+
+    for (let i = 0; i < 4; i++) {
+        if (i < fullOctets) {
+            binaryMask.push("11111111");
+        } else if (i === fullOctets && remainingBits > 0) {
+            binaryMask.push("1".repeat(remainingBits).padEnd(8, "0"));
+        } else {
+            binaryMask.push("00000000");
+        }
+    }
+
+    let binaryString = binaryMask.map(octet => `<span class="octet highlight">${octet}</span>`).join(" . ");
+    document.getElementById("result").innerHTML = `<div class="binary">${binaryString}</div>`;
+}
+</script>
+
+</body>
+</html>
 

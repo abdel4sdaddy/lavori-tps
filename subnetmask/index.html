@@ -45,12 +45,17 @@
         outline: none;
         font-size: 1.2rem;
         text-align: center;
-        /* Rimuove lo spin nei browser WebKit */
+        margin: 0;
+    }
+
+    /* Rimuove le freccette nei browser WebKit (Chrome, Safari, Edge) */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
 
-    /* Rimuove lo spin nei browser Firefox */
+    /* Rimuove le freccette in Firefox */
     input[type=number] {
         -moz-appearance: textfield;
     }
@@ -135,5 +140,3 @@ function generateMask() {
 
 </body>
 </html>
-
-

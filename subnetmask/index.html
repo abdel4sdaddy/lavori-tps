@@ -93,10 +93,8 @@
 <h1>Subnet Mask Generator</h1>
 
 <div class="container">
-    <label for="prefix">Prefix number (0–32): </label>
     <input type="number" id="prefix" min="0" max="32" placeholder="24">
     <button onclick="generateMask()">Genera</button>
-
     <div class="result" id="result"></div>
 </div>
 
@@ -104,7 +102,7 @@
 function generateMask() {
     let prefix = parseInt(document.getElementById("prefix").value);
     if (isNaN(prefix) || prefix < 0 || prefix > 32) {
-        document.getElementById("result").innerHTML = "Inserisci un numero tra 0 e 32.";
+        document.getElementById("result").innerHTML = "";
         return;
     }
 
@@ -123,14 +121,9 @@ function generateMask() {
     }
 
     let binaryString = binaryMask.map(octet => `<span class="octet highlight">${octet}</span>`).join(" . ");
-    document.getElementById("result").innerHTML = `
-        <div><b>Subnet mask in binario:</b></div>
-        <div class="binary">${binaryString}</div>
-    `;
+    document.getElementById("result").innerHTML = `<div class="binary">${binaryString}</div>`;
 }
 </script>
 
 </body>
 </html>
-
-

@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inserimento Dati</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0ebff;
+      margin: 0;
+      padding: 0;
+    }
+    .contenitore {
+      display: flex;
+      height: 100vh;
+    }
+    .sinistra {
+      flex: 1;
+      padding: 40px;
+    }
+    .destra {
+      flex: 1;
+      background-color: #f0f4ff;
+      border-left: 4px solid #003366;
+      padding: 40px;
+    }
+    h2 {
+      color: #003366;
+    }
+    input, select {
+      display: block;
+      margin-bottom: 15px;
+      padding: 8px;
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0055aa;
+    }
+    #risultato {
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="contenitore">
+  <div class="sinistra">
+    <h2>Inserisci i tuoi dati</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome">
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome">
+
+    <label for="indirizzo">Indirizzo:</label>
+    <input type="text" id="indirizzo">
+
+    <label for="sesso">Sesso:</label>
+    <input type="radio" id="maschio" name="sesso" value="Maschio"> Maschio
+    <input type="radio" id="femmina" name="sesso" value="Femmina"> Femmina
+    <input type="radio" id="altro" name="sesso" value="Altro"> Altro
+
+    <label for="veicoli">Veicoli posseduti:</label>
+    <input type="checkbox" id="bici" value="Bici"> Bici
+    <input type="checkbox" id="auto" value="Auto"> Auto
+    <input type="checkbox" id="barca" value="Barca"> Barca
+
+    <label for="provincia">Provincia:</label>
+    <select id="provincia">
+      <option value="0">Seleziona una provincia</option>
+      <option value="RM">Roma</option>
+      <option value="NA">Napoli</option>
+      <option value="TO">Torino</option>
+      <option value="MI">Milano</option>
+      <option value="PV">Pavia</option>
+    </select>
+
+    <label for="sport">Sport praticati:</label>
+    <input type="checkbox" id="calcio" value="Calcio"> Calcio
+    <input type="checkbox" id="basket" value="Basket"> Basket
+    <input type="checkbox" id="pallavolo" value="Pallavolo"> Pallavolo
+    <input type="checkbox" id="tennis" value="Tennis"> Tennis
+    <input type="checkbox" id="biliardo" value="Biliardo"> Biliardo
+
+    <button onclick="mostra()">Mostra a destra</button>
+  </div>
+
+  <div class="destra">
+    <h2>Dati Inseriti</h2>
+    <div id="risultato">
+      Inserisci i dati a sinistra e premi il pulsante.
+    </div>
+  </div>
+</div>
+
+<script>
+function mostra() {
+  var nome = document.getElementById("nome").value;
+  var cognome = document.getElementById("cognome").value;
+  var indirizzo = document.getElementById("indirizzo").value;
+
+  var sesso = document.querySelector('input[name="sesso"]:checked');
+  var sessoRisposta = sesso ? sesso.value : "Non specificato";
+
+  var veicoli = [];
+  if (document.getElementById("bici").checked) veicoli.push("Bici");
+  if (document.getElementById("auto").checked) veicoli.push("Auto");
+  if (document.getElementById("barca").checked) veicoli.push("Barca");
+  var veicoliRisposta = veicoli.length > 0 ? veicoli.join(", ") : "Nessun veicolo";
+
+  var provincia = document.getElementById("provincia").value;
+  var provinciaRisposta = provincia !== "0" ? provincia : "Non selezionata";
+
+  var sport = [];
+  if (document.getElementById("calcio").checked) sport.push("Calcio");
+  if (document.getElementById("basket").checked) sport.push("Basket");
+  if (document.getElementById("pallavolo").checked) sport.push("Pallavolo");
+  if (document.getElementById("tennis").checked) sport.push("Tennis");
+  if (document.getElementById("biliardo").checked) sport.push("Biliardo");
+  var sportRisposta = sport.length > 0 ? sport.join(", ") : "Nessuno sport";
+
+  var testo = "";
+  testo += "<b>Nome:</b> " + nome + "<br>";
+  testo += "<b>Cognome:</b> " + cognome + "<br>";
+  testo += "<b>Indirizzo:</b> " + indirizzo + "<br>";
+  testo += "<b>Sesso:</b> " + sessoRisposta + "<br>";
+  testo += "<b>Veicoli posseduti:</b> " + veicoliRisposta + "<br>";
+  testo += "<b>Provincia:</b> " + provinciaRisposta + "<br>";
+  testo += "<b>Sport praticati:</b> " + sportRisposta;
+
+  document.getElementById("risultato").innerHTML = testo;
+}
+</script>
+
+</body>
+</html>
 

@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calcolatrice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <div class="container">
+        <div class="intestazione">
+            <b>Russo Alessandro</b>
+        </div>
+        
+        <input type="text" id="schermo" disabled value="0"/>
+
+        <div id="calcolatrice">
+            <div class="pulsante operatore complesso" onclick="sin()">sin</div>
+            <div class="pulsante operatore complesso" onclick="cos()">cos</div>
+            <div class="pulsante operatore complesso" onclick="tan()">tan</div>
+            <div class="pulsante operatore complesso" onclick="radice()">√</div>
+            
+            <div class="pulsante" onclick="aggiungi('1')">1</div>
+            <div class="pulsante" onclick="aggiungi('2')">2</div>
+            <div class="pulsante" onclick="aggiungi('3')">3</div>
+            <div class="pulsante operatore semplice" onclick="aggiungi('+')">+</div>
+            
+            <div class="pulsante" onclick="aggiungi('4')">4</div>
+            <div class="pulsante" onclick="aggiungi('5')">5</div>
+            <div class="pulsante" onclick="aggiungi('6')">6</div>
+            <div class="pulsante operatore semplice" onclick="aggiungi('-')">-</div>
+            
+            <div class="pulsante" onclick="aggiungi('7')">7</div>
+            <div class="pulsante" onclick="aggiungi('8')">8</div>
+            <div class="pulsante" onclick="aggiungi('9')">9</div>
+            <div class="pulsante operatore semplice" onclick="aggiungi('/')">/</div>
+            
+            <div class="pulsante" onclick="aggiungi('.')">.</div>
+            <div class="pulsante" onclick="aggiungi('0')">0</div>
+            <div class="pulsante operatore semplice" onclick="aggiungi('^')">^</div>
+            <div class="pulsante operatore semplice" onclick="aggiungi('*')">*</div>
+            
+            <div class="pulsante operatore" onclick="memoria()">M</div>
+            <div class="pulsante operatore" onclick="memoriastampa()">SM</div>
+            <div class="pulsante speciale" onclick="calcola()">=</div>
+            <div class="pulsante speciale" onclick="cancella()">C</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(0, 0, 255), rgb(0, 191, 255));
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    background-color: rgb(148, 148, 148);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.intestazione {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#schermo {
+    width: 100%;
+    height: 65px;
+    font-size: 30px;
+    text-align: right;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+#calcolatrice {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 15px;
+}
+
+.pulsante {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(210, 216, 214);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #333;
+    user-select: none;
+    transition: transform 0.1s, filter 0.1s;
+}
+
+.operatore {
+    background-color: orange;
+}
+
+.semplice {
+    background-color: rgb(255, 102, 0);
+}
+
+.speciale {
+    background-color: white;
+}
+
+.pulsante:hover {
+    filter: brightness(1.1);
+}
+
+.pulsante:active {
+    transform: scale(0.95);
+}
+
+</style>
+
+<script>
+  var schermo = document.getElementById("schermo");
+var memoria = 0;
+
+function aggiungi(valore) {
+    if (schermo.value === "0") {
+        schermo.value = valore;
+    } else {
+        schermo.value += valore;
+    }
+}
+
+function cancella() {
+    schermo.value = "0";
+}
+
+
+function sin() {
+    var n = parseFloat(schermo.value);
+    schermo.value = Math.sin(n * Math.PI / 180);
+}
+
+function cos() {
+    var n = parseFloat(schermo.value);
+    schermo.value = Math.cos(n * Math.PI / 180);
+}
+
+function tan() {
+    var n = parseFloat(schermo.value);
+    schermo.value = Math.tan(n * Math.PI / 180);
+}
+
+function radice() {
+    var n = parseFloat(schermo.value);
+    schermo.value = Math.sqrt(n);
+}
+
+
+function memoria() {
+    memoria = parseFloat(schermo.value);
+}
+
+function memoriastampa() {
+    schermo.value = memoria;
+}
+
+
+function calcola() {
+    var testo = schermo.value;
+    var elementi = [];
+    var numero = "";
+
+ 
+    for (var i = 0; i < testo.length; i++) {
+        var c = testo[i];
+        if ((c >= '0' && c <= '9') || c === '.') {
+            numero += c;
+        } else {
+            elementi.push(numero);
+            elementi.push(c);
+            numero = "";
+        }
+    }
+    elementi.push(numero);
+
+
+    for (var i = 1; i < elementi.length; i += 2) {
+        if (elementi[i] === '^') {
+            var a = parseFloat(elementi[i - 1]);
+            var b = parseFloat(elementi[i + 1]);
+            var risultato = Math.pow(a, b);
+            elementi.splice(i - 1, 3, risultato.toString());
+            i -= 2;
+        }
+    }
+
+    for (var i = 1; i < elementi.length; i += 2) {
+        if (elementi[i] === '*' || elementi[i] === '/') {
+            var a = parseFloat(elementi[i - 1]);
+            var b = parseFloat(elementi[i + 1]);
+            var risultato = (elementi[i] === '*') ? a * b : a / b;
+            elementi.splice(i - 1, 3, risultato.toString());
+            i -= 2;
+        }
+    }
+
+
+    for (var i = 1; i < elementi.length; i += 2) {
+        var a = parseFloat(elementi[i - 1]);
+        var b = parseFloat(elementi[i + 1]);
+        var risultato = (elementi[i] === '+') ? a + b : a - b;
+        elementi.splice(i - 1, 3, risultato.toString());
+        i -= 2;
+    }
+
+    schermo.value = elementi[0];
+}
+</script>

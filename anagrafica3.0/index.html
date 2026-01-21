@@ -13,7 +13,7 @@
         body {
             margin: 0;
             padding: 20px 0;
-            background-color: ##00ff00;
+            background-color: #f0f0f0;
             font-family: Serif, Helvetica, sans-serif;
         }
 
@@ -44,7 +44,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            background-color: white;
+            background-color: light gray;
             max-width: 500px;
             width: 90%;
             margin: 0 auto;
@@ -75,7 +75,7 @@
             height: 35px;
             border-radius: 50%;
             border: none;
-            background-color: ##ff0000;
+            background-color: #ff2525;
             color: white;
             font-weight: bold;
             cursor: pointer;
@@ -97,7 +97,7 @@
         }
 
         input {
-            width: 80%;
+            width: 100%;
             padding: 10px;
             border: 2px solid #dfdfdf;
             border-radius: 10px;
@@ -109,7 +109,7 @@
         }
 
         .btn-stampa {
-            padding: 10px 20px;
+            padding: 15px 20px;
             border: none;
             border-radius: 10px;
             background-color: #28a745;
@@ -191,7 +191,7 @@
 
         <section class="input-group">
             <h3>COLORE PREFERITO:</h3>
-            <input id="input-colore" type="text" placeholder="Es. Nero">
+            <input id="input-colore" type="text" placeholder="Es. Blu">
         </section>
 
         <section class="bottone">
@@ -222,7 +222,7 @@
                 oggetto.eta === "" ||
                 oggetto.colore === ""
             ) {
-                alert("compila tutti i campi!");
+                alert("Compila tutti i campi!");
                 return;
             }
 
@@ -257,4 +257,3 @@
 
 </body>
 </html>
-

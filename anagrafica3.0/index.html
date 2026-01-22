@@ -171,7 +171,6 @@
         <section class="paragrafo">
             <p><strong>INSERISCI I TUOI DATI</strong>.<br> 
             Per pulire le stampe premi la X rossa.</p>
-            <button class="btn-delete" onclick="cancella()">X</button>
         </section>
 
         <section class="input-group">
@@ -191,11 +190,12 @@
 
         <section class="input-group">
             <h3>COLORE PREFERITO:</h3>
-            <input id="input-colore" type="text" placeholder="Es. Blu">
+            <input id="input-colore" type="text" placeholder="Es. Nero">
         </section>
 
         <section class="bottone">
             <button class="btn-stampa" onclick="stampa()">STAMPA</button>
+            <button class="btn-delete" onclick="cancella()">X</button>
         </section>
 
         <section class="output" id="output">
@@ -209,6 +209,9 @@
         const persona = [];
 
         function stampa() {
+
+            persona.length = 0;
+            
             const oggetto = {
                 nome: document.getElementById("input-nome").value,
                 cognome: document.getElementById("input-cognome").value,
@@ -216,15 +219,7 @@
                 colore: document.getElementById("input-colore").value
             };
 
-            if (
-                oggetto.nome === "" ||
-                oggetto.cognome === "" ||
-                oggetto.eta === "" ||
-                oggetto.colore === ""
-            ) {
-                alert("Compila tutti i campi!");
-                return;
-            }
+            
 
             persona.push(oggetto);
 
@@ -232,12 +227,14 @@
                 document.getElementById("dati").innerHTML += "<hr><br>";
             }
 
-            document.getElementById("dati").innerHTML +=
-                "Nome: " + oggetto.nome + "<br>" +
-                "Cognome: " + oggetto.cognome + "<br>" +
-                "Età: " + oggetto.eta + "<br>" +
-                "Colore preferito: " + oggetto.colore + "<br><br>";
-
+            for(var i = 0; i < persona.length; i++){
+                document.getElementById("dati").innerHTML +=
+                    "Nome: " + oggetto.nome + "<br>" +
+                    "Cognome: " + oggetto.cognome + "<br>" +
+                    "Età: " + oggetto.eta + "<br>" +
+                    "Colore preferito: " + oggetto.colore + "<br><br>";
+            }
+                
             document.getElementById("input-nome").value = "";
             document.getElementById("input-cognome").value = "";
             document.getElementById("input-eta").value = "";

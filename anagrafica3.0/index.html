@@ -69,36 +69,33 @@
             margin: 0;
         }
 
-        /* NUOVO: Gestione del contenitore dei bottoni per allinearli */
+      
         .bottone {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px; /* Spazio tra i due bottoni */
+            gap: 15px; 
             width: 100%;
         }
 
-        /* MODIFICATO: Tasto X (Delete) */
         .btn-delete {
-            background-color: #007bff; /* Colore Blu come richiesto */
-            color: white; /* X bianca */
+            background-color: #007bff; 
+            color: white;
             border: none;
-            border-radius: 50%; /* Cerchio perfetto */
-            width: 50px;  /* Larghezza fissa */
-            height: 50px; /* Altezza fissa uguale alla larghezza */
+            border-radius: 50%; 
+            width: 50px;  
+            height: 50px; 
             display: flex;
-            justify-content: center; /* Centra la X orizzontalmente */
-            align-items: center;     /* Centra la X verticalmente */
+            justify-content: center; 
+            align-items: center;     
             font-weight: bold;
             font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3); /* Ombra Blu */
-            transition: transform 0.2s;
+            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3); 
         }
 
         .btn-delete:hover {
-            transform: translateY(-2px);
-            background-color: #dc3545; /* (Opzionale) Diventa rosso quando ci passi sopra */
+            background-color: #dc3545; 
         }
 
         .input-group {
@@ -124,25 +121,21 @@
             border-color: #007bff;
         }
 
-        /* MODIFICATO: Tasto Stampa (Blu) */
+       
         .btn-stampa {
             padding: 15px 20px;
             border: none;
             border-radius: 10px;
-            background-color: #007bff; /* Blu */
+            background-color: #007bff; 
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3); /* Ombra Blu */
-            transition: transform 0.2s;
-            height: 50px; /* Forza l'altezza per essere uguale al cerchio */
+            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3);
+            height: 50px;
             display: flex;
             align-items: center;
         }
 
-        .btn-stampa:hover {
-            transform: translateY(-2px);
-        }
 
         .output {
             margin-top: 20px;

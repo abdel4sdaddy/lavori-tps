@@ -69,13 +69,36 @@
             margin: 0;
         }
 
+        /* NUOVO: Gestione del contenitore dei bottoni per allinearli */
+        .bottone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Spazio tra i due bottoni */
+            width: 100%;
+        }
+
+        /* MODIFICATO: Tasto X (Delete) */
         .btn-delete {
-            background-color: red;
-            border-radius: 32px;
-            padding: 15px;
-            width: 15px;
-            height: 15px;
-            box-shadow: 0px 4px 10px 5px rgb(255, 77, 77, 0.3);
+            background-color: #007bff; /* Colore Blu come richiesto */
+            color: white; /* X bianca */
+            border: none;
+            border-radius: 50%; /* Cerchio perfetto */
+            width: 50px;  /* Larghezza fissa */
+            height: 50px; /* Altezza fissa uguale alla larghezza */
+            display: flex;
+            justify-content: center; /* Centra la X orizzontalmente */
+            align-items: center;     /* Centra la X verticalmente */
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3); /* Ombra Blu */
+            transition: transform 0.2s;
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            background-color: #dc3545; /* (Opzionale) Diventa rosso quando ci passi sopra */
         }
 
         .input-group {
@@ -101,16 +124,20 @@
             border-color: #007bff;
         }
 
+        /* MODIFICATO: Tasto Stampa (Blu) */
         .btn-stampa {
             padding: 15px 20px;
             border: none;
             border-radius: 10px;
-            background-color: #28a745;
+            background-color: #007bff; /* Blu */
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px 5px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 4px 10px 5px rgba(0, 123, 255, 0.3); /* Ombra Blu */
             transition: transform 0.2s;
+            height: 50px; /* Forza l'altezza per essere uguale al cerchio */
+            display: flex;
+            align-items: center;
         }
 
         .btn-stampa:hover {
@@ -163,7 +190,7 @@
     <div class="container">
         <section class="paragrafo">
             <p><strong>INSERISCI I TUOI DATI</strong>.<br> 
-            Per pulire le stampe premi la X rossa.</p>
+            Per pulire le stampe premi la X.</p>
         </section>
 
         <section class="input-group">
@@ -202,8 +229,9 @@
         const persona = [];
 
         function stampa() {
-
-            persona.length = 0;
+            // Nota: ho rimosso persona.length = 0 se vuoi che aggiunga più persone.
+            // Se vuoi cancellare ogni volta, lascia pure persona.length = 0;
+            persona.length = 0; 
             
             const oggetto = {
                 nome: document.getElementById("input-nome").value,
@@ -211,8 +239,6 @@
                 eta: document.getElementById("input-eta").value,
                 colore: document.getElementById("input-colore").value
             };
-
-            
 
             persona.push(oggetto);
 

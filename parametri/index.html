@@ -1,46 +1,25 @@
-<!DOCTYPE html>
+
 <html>
+<link rel="stylesheet" href="style.css">
 
 <head>
-    <title>Inserimento dati</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
-        }
-
-        form {
-            width: 300px;
-            margin: 60px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-title {
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-        }
-    </style>
 </head>
 
 <body>
 
 <form name="frmMaschera" action="risultati.html" method="get">
     <h2 class="form-title">Inserisci i dati</h2>
-    <p>Nome:</p>
-    <input type="text" name="txtN">
+    <p>Nome: </p>
+    <input type="text" name="txtN"><br>
     <p>Cognome:</p>
-    <input type="text" name="txtC">
+    <input type="text" name="txtC"><br>
     <p>Età:</p>
     <input type="number" name="txtE"><br><br>
+
     <input type="submit" value="trasmetti dati">
+
 </form>
 
 </body>
+
 </html>

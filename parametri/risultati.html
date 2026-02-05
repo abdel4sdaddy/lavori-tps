@@ -1,45 +1,28 @@
+
 <!DOCTYPE html>
+<link rel="stylesheet" href="style2.css">
 <html>
 
 <head>
     <title>Dati ricevuti</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-        }
-
-        .page-header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        table {
-            margin: 30px auto;
-            border-collapse: collapse;
-            background-color: white;
-        }
-
-        td, th {
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
 </head>
 
 <body>
 
 <header class="page-header">
-    <h1>Dati ricevuti</h1>
+  <h1 class="page-title">Dati ricevuti</h1>
+  <p class="page-subtitle">Sotto trovi la tabella con i dati che hai inserito</p>
 </header>
 
-<table id="tabella1"></table>
+<div class="table-container">
+  <div class="table-wrap">
+    <table id="tabella1" border="1"></table>
+  </div>
+</div>
 
+<!-- collegamento al file JavaScript -->
 <script src="script.js"></script>
 
 </body>
-</html>
 
+</html>

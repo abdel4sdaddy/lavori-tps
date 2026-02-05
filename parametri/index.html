@@ -1,16 +1,20 @@
- <html>
-<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html>
 
 <head>
+    <title>Form e Dati ricevuti</title>
+
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
         }
 
         form {
             width: 300px;
-            margin: 60px auto;
+            margin: 40px auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
@@ -48,25 +52,82 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        .page-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .page-title {
+            margin: 0;
+        }
+
+        .page-subtitle {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .table-wrap {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 300px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        table th {
+            background-color: #e6e6e6;
+        }
     </style>
 </head>
 
 <body>
 
-<form name="frmMaschera" action="risultato.html" method="get">
+<form name="frmMaschera" action="#" method="get">
     <h2 class="form-title">Inserisci i dati</h2>
-    <p>Nome: </p>
-    <input type="text" name="txtN"><br>
+    <p>Nome:</p>
+    <input type="text" name="txtN">
     <p>Cognome:</p>
-    <input type="text" name="txtC"><br>
+    <input type="text" name="txtC">
     <p>Età:</p>
     <input type="number" name="txtE"><br><br>
-
     <input type="submit" value="trasmetti dati">
-
 </form>
+
+<header class="page-header">
+    <h1 class="page-title">Dati ricevuti</h1>
+    <p class="page-subtitle">Sotto trovi la tabella con i dati che hai inserito</p>
+</header>
+
+<div class="table-container">
+    <div class="table-wrap">
+        <table id="tabella1" border="1"></table>
+    </div>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 
 </html>
-

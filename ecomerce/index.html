@@ -3,200 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atheltica Sky - Speed & Fly</title>
+    <title>NEO-Tech Store - Gaming & Consoles Hub</title>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --accent-blue: #0ea5e9; /* Azzurro brillante */
-            --dark-blue: #0369a1;   /* Blu per hover */
-            --bg-light: #f8fafc;    /* Bianco sporco/ghiaccio */
-            --pure-white: #ffffff;
-            --text-main: #1e293b;
+            --bg-game: #09090e;
+            --bg-hud: #11121c;
+            --neon-pink: #ff007f;
+            --neon-cyan: #00f0ff;
+            --text-light: #f3f4f6;
+            --text-dark: #6b7280;
+            --glow-shadow: rgba(0, 240, 255, 0.2);
         }
 
-        body {
-            background-color: var(--bg-light);
-            font-family: 'Montserrat', sans-serif;
-            padding: 20px;
-            color: var(--text-main);
+        body { 
+            background: var(--bg-game);
+            background-image: 
+                radial-gradient(circle at 20% 10%, rgba(255, 0, 127, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            padding: 40px 20px; 
+            color: var(--text-light); 
             margin: 0;
+            min-height: 100vh;
         }
 
+        /* HUD Header */
         .store-header {
             max-width: 1200px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 50px auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--pure-white);
-            padding: 20px 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.1);
+            padding-bottom: 25px;
         }
 
-        h2 {
+        .logo-area h2 {
+            font-size: 34px;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin: 0;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        
+        .logo-area p {
+            margin: 4px 0 0 0;
+            color: var(--neon-cyan);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
 
+        /* File Upload */
         .upload-container {
-            font-size: 14px;
-            color: #64748b;
+            background: var(--bg-hud);
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+        }
+
+        .upload-container label {
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, var(--neon-pink), #b000ff);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
         }
 
         input[type="file"] {
-            border: 1px solid #e2e8f0;
-            padding: 5px;
-            border-radius: 8px;
-            font-size: 12px;
+            color: var(--text-dark);
+            font-size: 13px;
         }
 
-        #contenitore {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+        /* Grid Catalogo */
+        #contenitore { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 35px; 
             max-width: 1200px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 60px auto;
         }
 
-        .blocco {
-            background: var(--pure-white);
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
+        /* Card Prodotto (Gioco/Console) */
+        .blocco { 
+            background: var(--bg-hud); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            border-radius: 20px; 
+            padding: 24px; 
+            color: var(--text-light); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            text-align: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blocco::after {
+            content: 'GAMING HUB';
+            position: absolute;
+            top: 12px; right: 12px;
+            font-size: 9px; font-weight: 800; color: rgba(0, 240, 255, 0.3);
+            letter-spacing: 1px;
         }
 
         .blocco:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.1);
-            border-color: var(--accent-blue);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 240, 255, 0.15);
+            border-color: var(--neon-cyan);
         }
 
-        .blocco img {
-            width: 100%;
-            height: 160px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            background: #f1f5f9;
+        .blocco img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            background: #050508;
+            border-radius: 14px;
+            margin-bottom: 20px; 
+            transition: transform 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        .product-info b {
-            font-size: 20px;
-            color: var(--text-main);
+        .blocco:hover img {
+            transform: scale(1.03);
+        }
+
+        .product-info {
+            margin-bottom: 25px;
+        }
+
+        .blocco p {
+            margin: 0;
+        }
+
+        .blocco p b {
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: -0.5px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         .product-model {
-            color: var(--accent-blue);
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 5px;
-            margin-bottom: 20px;
+            color: var(--neon-pink);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        button {
-            cursor: pointer;
-            width: 100%;
-            padding: 12px;
-            font-weight: 600;
-            border-radius: 10px;
+        /* Pulsanti d'Azione */
+        .button-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        button { 
+            cursor: pointer; 
+            padding: 12px 16px; 
+            font-weight: 800; 
+            font-size: 13px;
             border: none;
-            transition: 0.2s;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .btn-detail {
-            background: #f1f5f9;
-            color: #475569;
-            margin-bottom: 8px;
+        .btn-details {
+            background: #1f2033;
+            color: #9ca3af;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-details:hover {
+            background: #2b2d48;
+            color: var(--text-light);
         }
 
         .btn-add {
-            background: var(--accent-blue);
-            color: white;
+            background: linear-gradient(135deg, var(--neon-cyan), #00a8ff);
+            color: #09090e;
+            flex: 1.4;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
         }
 
         .btn-add:hover {
-            background: var(--dark-blue);
+            transform: scale(1.03);
+            box-shadow: 0 0 25px var(--neon-cyan);
         }
 
-        #area-carrello {
-            background: var(--pure-white);
-            padding: 30px;
-            max-width: 500px;
-            margin: 40px auto;
-            border-radius: 24px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        /* Area Inventario (Carrello) */
+        #area-carrello { 
+            background: var(--bg-hud);
+            color: var(--text-light); 
+            padding: 40px; 
+            border-radius: 24px; 
+            border: 1px solid rgba(0, 240, 255, 0.1); 
+            max-width: 650px;
+            margin: 0 auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
         }
 
-        .total-wrapper {
-            font-weight: 800;
+        #area-carrello h3 {
+            margin-top: 0;
             font-size: 22px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-main);
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--neon-pink);
+            padding-left: 14px;
         }
 
         #lista-carrello p {
-            background: #f8fafc;
-            padding: 10px 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent-blue);
             font-size: 14px;
+            background: rgba(5, 5, 8, 0.5);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 12px 0;
+            border-left: 4px solid var(--neon-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        
-        .info-box {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
+        #area-carrello hr {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin: 30px 0;
+        }
+
+        .total-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+        }
+
+        .total-wrapper b {
+            font-size: 30px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-calc {
+            width: 100%;
+            background: #00ff87;
+            color: #09090e;
+            font-size: 15px;
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.3);
+        }
+
+        .btn-calc:hover {
+            box-shadow: 0 0 25px #00ff87;
+            transform: translateY(-2px);
+        }
+
+        .btn-pdf {
+            width: 100%;
+            background: linear-gradient(135deg, var(--neon-pink), #b000ff);
+            color: white;
+            margin-top: 15px;
+            font-size: 15px;
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--neon-pink);
+        }
+
+        /* Finestra Dettagli (Modal) Pop-up */
+        .info-box { 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 450px;
-            background: white;
-            padding: 30px;
+            max-width: 480px;
+            background: var(--bg-hud); 
+            color: var(--text-light); 
+            padding: 40px; 
             border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            z-index: 100;
-            text-align: center;
+            box-shadow: 0 0 0 100vmax rgba(4, 4, 6, 0.85), 0 30px 60px rgba(0,0,0,0.8);
+            z-index: 99; 
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .info-box h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .info-box p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #9ca3af;
+            margin-bottom: 25px;
+        }
+
+        .info-box .modal-close-btn {
+            width: 100%;
+            background: #f43f5e;
+            color: white;
+            padding: 14px;
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+        }
+
+        .info-box .modal-close-btn:hover {
+            background: #e11d48;
+            box-shadow: 0 0 25px #f43f5e;
         }
     </style>
 </head>
 <body>
 
 <div class="store-header">
-    <h2>ATHLETICA<span>SKY</span></h2>
+    <div class="logo-area">
+        <h2>NEO-Tech Store</h2>
+        <p>Gaming & Hardware Zone</p>
+    </div>
     <div class="upload-container">
-        <label>Listino CSV: </label>
+        <label for="inputDati">Importa CSV Giochi:</label>
         <input type="file" id="inputDati" accept=".csv">
     </div>
 </div>
 
 <div id="contenitore"></div>
+
 <div id="finestra" class="info-box"></div>
 
 <div id="area-carrello">
-    <h3 style="margin-top:0; color: var(--accent-blue);">Il tuo Carrello</h3>
+    <h3>Inventario Sessione</h3>
     <div id="lista-carrello"></div>
+    <hr>
     <div class="total-wrapper">
-        <span>TOTALE:</span>
-        <span><span id="euro">0.00</span> €</span>
+        <span>Crediti Totali Richiesti:</span>
+        <b><span id="euro">0.00</span> €</b>
     </div>
-    <button class="btn-add" onclick="calcola_totale(0,0,'')">Aggiorna Carrello</button>
-    <button id="btn-stampa" class="btn-detail" onclick="genera_pdf_jspdf()" style="display:none; margin-top:10px; background: #e0f2fe; color: var(--dark-blue);">Scarica Preventivo PDF</button>
+    <button class="btn-calc" onclick="calcola_totale(0,0,'')">Calcola Totale</button>
+    <button id="btn-stampa" class="btn-pdf" onclick="genera_pdf_jspdf()" style="display:none;">Procedi al Checkout (PDF)</button>
 </div>
 
 <script>
-
 var elenco_prod = [];
 var carrello = [];
 
@@ -205,6 +405,7 @@ document.getElementById("inputDati").addEventListener("change", function(e){
     lettore.onload = function(evento){
         var testo = evento.target.result;
         var righe = testo.replace(/\r/g, "").split("\n");
+        // Svuota i vecchi caricamenti per evitare sovrapposizioni visive
         elenco_prod = [];
         document.getElementById("contenitore").innerHTML = "";
         carica_dati(righe, 1); 
@@ -232,17 +433,21 @@ function carica_dati(righe, i){
 
 function disegna_tutto(pos){
     if(pos >= elenco_prod.length) return;
+    
     var cont = document.getElementById("contenitore");
     var div = document.createElement("div");
     div.className = "blocco";
-    div.innerHTML = `<img src="${elenco_prod[pos].im}" onerror="this.src='https://via.placeholder.com/200x150/e0f2fe/0ea5e9?text=Atletica'">
-                    <div class='product-info'>
-                        <p><b>${elenco_prod[pos].m}</b></p>
-                        <p class='product-model'>${elenco_prod[pos].mo}</p>
-                        <p style="font-size:12px; color:#64748b; margin-bottom:15px;">Uso: ${elenco_prod[pos].de}</p>
-                    </div>
-                    <button class='btn-detail' onclick='apri(${pos})'>Info Tecnica</button>
-                    <button class='btn-add' onclick='metti_nel_carrello(${pos})'>Aggiungi</button>`;
+    
+    div.innerHTML = "<img src='"+elenco_prod[pos].im+"' alt='Game/Console Art'>" +
+                    "<div class='product-info'>" +
+                    "<p><b>"+elenco_prod[pos].m+"</b></p>" +
+                    "<p class='product-model'>"+elenco_prod[pos].mo+"</p>" +
+                    "</div>" +
+                    "<div class='button-group'>" +
+                    "<button class='btn-details' onclick='apri("+pos+")'>Info</button>" +
+                    "<button class='btn-add' onclick='metti_nel_carrello("+pos+")'>Prendi</button>" +
+                    "</div>";
+    
     cont.appendChild(div);
     disegna_tutto(pos + 1);
 }
@@ -250,10 +455,11 @@ function disegna_tutto(pos){
 function apri(id){
     var f = document.getElementById("finestra");
     f.style.display = "block";
-    f.innerHTML = `<h3 style="color:var(--accent-blue)">${elenco_prod[id].m} ${elenco_prod[id].mo}</h3>
-                  <p>Specialità: ${elenco_prod[id].de}</p>
-                  <p style='font-weight:700; font-size:24px;'>€ ${elenco_prod[id].pr}</p>
-                  <button class='btn-add' onclick='this.parentElement.style.display="none"'>Chiudi</button>`;
+    f.innerHTML = "<h2>"+elenco_prod[id].m+"</h2>" +
+                  "<p style='color: var(--neon-cyan); font-weight:700; font-size:13px; text-transform:uppercase;'>Piattaforma: "+elenco_prod[id].mo+"</p>" +
+                  "<p>"+elenco_prod[id].de+"</p>" +
+                  "<p style='font-weight:800; font-size:24px; color:#00ff87; margin-bottom:25px;'>Valore: "+elenco_prod[id].pr+" €</p>" +
+                  "<button class='modal-close-btn' onclick='this.parentElement.style.display=\"none\"'>Chiudi File</button>";
 }
 
 function metti_nel_carrello(id){
@@ -267,30 +473,40 @@ function calcola_totale(n, tot, stringa){
         document.getElementById("btn-stampa").style.display = "block";
         return;
     }
-    var p = parseFloat(carrello[n].pr.replace(",", "."));
-    var riga = `<p><span>${carrello[n].mo}</span> - <b>${carrello[n].pr} €</b></p>`;
+    
+    var prezzoPulito = carrello[n].pr.replace(",", ".").trim();
+    var p = parseFloat(prezzoPulito);
+    
+    if (isNaN(p)) {
+        p = 0;
+    }
+    
+    var riga = "<p><span><b>"+carrello[n].m+"</b> <small style='color:var(--neon-pink)'>["+carrello[n].mo+"]</small></span> <b style='color:var(--neon-cyan)'>"+carrello[n].pr+" €</b></p>";
+    
     calcola_totale(n + 1, tot + p, stringa + riga);
 }
 
 function genera_pdf_jspdf(){
     var doc = new jsPDF();
-    doc.setTextColor(14, 165, 233);
-    doc.text("ATHLETICA SKY - PREVENTIVO", 15, 20);
-    doc.setTextColor(0, 0, 0);
-    doc.text("---------------------------------------", 15, 27);
+    doc.text("RICEVUTA D'ACQUISTO - NEO-TECH STORE", 15, 20);
+    doc.text("-----------------------------------------", 15, 27);
     scrivi_righe_pdf(doc, 0, 35);
 }
 
 function scrivi_righe_pdf(doc, n, y){
     if(n >= carrello.length){
-        doc.text("---------------------------------------", 15, y);
-        doc.text("TOTALE ORDINE: " + document.getElementById("euro").innerText + " EUR", 15, y + 10);
-        doc.save("preventivo_atletica.pdf");
+        var totale = document.getElementById("euro").innerText;
+        doc.text("-----------------------------------------", 15, y);
+        doc.text("Totale: " + totale + " EUR", 15, y + 10);
+        doc.save("ricevuta_acquisto.pdf");
         return;
     }
-    doc.text(carrello[n].m + " " + carrello[n].mo + " : " + carrello[n].pr + " EUR", 15, y);
+    
+    var rigaTesto = carrello[n].m + " " + carrello[n].mo + " - " + carrello[n].pr + " EUR";
+    doc.text(rigaTesto, 15, y);
     scrivi_righe_pdf(doc, n + 1, y + 10);
 }
 </script>
+
 </body>
 </html>

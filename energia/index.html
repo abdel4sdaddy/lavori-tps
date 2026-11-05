@@ -1,1 +1,168 @@
 
+<!DOCTYPE HTML>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Andamento del costo dell'energia</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #e4a4fc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #c409f3;
+            color: #fff700;
+        }
+
+        tr.pari {
+            background-color: #f9f9f9;
+        }
+
+        #dati-container {
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+
+        .errore {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Andamento del costo dell'energia elettrica</h2>
+
+    <p id="descrizione"></p>
+    <p id="metadati"></p>
+
+    <div id="dati-container">Caricamento dati in corso...</div>
+
+    <script>
+        var url = "dati.json";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                var contenitore =
+                    document.getElementById("dati-container");
+
+                if (xhr.status === 200) {
+                    try {
+                        var dati = JSON.parse(xhr.responseText);
+
+                        document.getElementById("descrizione")
+                            .textContent = dati.descrizione || "";
+
+                        document.getElementById("metadati")
+                            .textContent =
+                            "Unità di misura: " +
+                            (dati.unita_di_misura || "") +
+                            " | Fonte: " +
+                            (dati.fonte_riferimento || "") +
+                            " | Aggiornamento: " +
+                            (dati.aggiornamento || "");
+
+                        var righe = dati.andamento_mensile;
+
+                        if (!Array.isArray(righe) || righe.length === 0) {
+                            contenitore.textContent =
+                                "Nessun dato disponibile.";
+                            return;
+                        }
+
+                        var tabella = document.createElement("table");
+                        var thead = document.createElement("thead");
+                        var tbody = document.createElement("tbody");
+
+                        var intestazione = document.createElement("tr");
+
+                        var colonne = [
+                            "Anno",
+                            "Mese",
+                            "Valore medio PUN (EUR/MWh)"
+                        ];
+
+                        colonne.forEach(function(nome) {
+                            var th = document.createElement("th");
+                            th.textContent = nome;
+                            intestazione.appendChild(th);
+                        });
+
+                        thead.appendChild(intestazione);
+                        tabella.appendChild(thead);
+
+                        righe.forEach(function(row, i) {
+                            var tr = document.createElement("tr");
+
+                            if (i % 2 === 0) {
+                                tr.className = "pari";
+                            }
+
+                            [
+                                row.anno,
+                                row.mese,
+                                row.valore_medio_pun
+                            ].forEach(function(valore) {
+                                var td = document.createElement("td");
+
+                                td.textContent =
+                                    valore !== undefined && valore !== null
+                                    ? valore
+                                    : "";
+
+                                tr.appendChild(td);
+                            });
+
+                            tbody.appendChild(tr);
+                        });
+
+                        tabella.appendChild(tbody);
+
+                        contenitore.textContent = "";
+                        contenitore.appendChild(tabella);
+
+                    } catch (errore) {
+                        contenitore.textContent =
+                            "Errore durante l'elaborazione dei dati.";
+                        contenitore.className = "errore";
+                    }
+                } else {
+                    contenitore.textContent =
+                        "Errore HTTP: " + xhr.status;
+                    contenitore.className = "errore";
+                }
+            }
+        };
+
+        xhr.onerror = function() {
+            var contenitore =
+                document.getElementById("dati-container");
+
+            contenitore.textContent =
+                "Errore di rete durante il caricamento del JSON.";
+
+            contenitore.className = "errore";
+        };
+
+        xhr.send();
+    </script>
+
+</body>
+</html>
